@@ -22,7 +22,38 @@ public class App {
             System.out.printf("명령) ");
             String command = sc.nextLine().trim();
 
-            switch (command) {
+            // 명령을 앞으로 Path에 담을 것
+            Rq rq = new Rq(command);
+            String Path = rq.getPath();
+
+            switch (Path) {
+                case "삭제":
+                    int delete_id = rq.getIntParam("id", 0);    // 사용자가 삭제하고자 하는 명언의 아이디를 담을 변수
+
+                    if(delete_id == 0) {
+                        System.out.println("id를 입력해주세요.");
+                        continue ;
+                    }
+
+                    WiseSaying wiseSaying_wantDelete = null;        // 사용자가 삭제하고 싶은 id번의 WiseSaying을 담을 변수
+
+                    for(WiseSaying wiseSaying_Delete : wiseSayingList) {    // 그 id에 해당하는 WiseSaying을 찾는 과정
+                        if(wiseSaying_Delete.id == delete_id) {
+                            wiseSaying_wantDelete = wiseSaying_Delete;  // 찾게되면 wiseSaying_wantDelete에 삭제할 WiseSaying을 담는다
+                        }
+                    }
+
+                    if(wiseSaying_wantDelete == null) {     // 존재하지 않는 경우
+                        System.out.printf("%d번 명언은 존재하지 않습니다.\n", delete_id);
+                        continue ;
+                    }
+
+                    // 찾았으면 그 WiseSaying은 삭제 !
+                    wiseSayingList.remove(wiseSaying_wantDelete);
+
+                    System.out.printf("%d번 명언이 삭제되었습니다.\n", delete_id);
+
+                    break ;
 
                 case "목록":
                     System.out.println("번호 / 작가 / 명언\n" +
