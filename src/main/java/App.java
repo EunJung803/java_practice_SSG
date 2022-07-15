@@ -23,6 +23,7 @@ public class App {
             String command = sc.nextLine().trim();
 
             switch (command) {
+
                 case "목록":
                     System.out.println("번호 / 작가 / 명언\n" +
                             "----------------------");
