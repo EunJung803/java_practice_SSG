@@ -1,14 +1,21 @@
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AppTest {
+
+    @Test
+    public void Rq_test() {
+        Rq rq = new Rq("삭제?id=1");
+
+        int id = rq.getIntParam("id", 0);
+
+        assertEquals(1, id);
+    }
 
     @Test
     public void 스캐너에_키보드가_아닌_문자열을_입력으로_설정() {
