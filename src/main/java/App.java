@@ -27,6 +27,40 @@ public class App {
             String Path = rq.getPath();
 
             switch (Path) {
+                case "수정":
+                    int modify_id = rq.getIntParam("id", 0);    // 사용자가 수정하고자 하는 명언의 아이디를 담을 변수
+
+                    if(modify_id == 0) {
+                        System.out.println("id를 입력해주세요.");
+                        continue ;
+                    }
+
+                    WiseSaying wiseSaying_wantModify = null;        // 사용자가 수정하고 싶은 id번의 WiseSaying을 담을 변수
+
+                    for(WiseSaying wiseSaying_Modify : wiseSayingList) {    // 그 id에 해당하는 WiseSaying을 찾는 과정
+                        if(wiseSaying_Modify.id == modify_id) {
+                            wiseSaying_wantModify = wiseSaying_Modify;  // 찾게되면 WiseSaying을 wiseSaying_wantModify에 담아놓는다
+                        }
+                    }
+
+                    if(wiseSaying_wantModify == null) {     // 존재하지 않는 경우
+                        System.out.printf("%d번 명언은 존재하지 않습니다.\n", modify_id);
+                        continue ;
+                    }
+
+                    // 찾았으면 수정 진행
+                    System.out.printf("명언(기존) : %s\n", wiseSaying_wantModify.quote);
+                    System.out.printf("명언 : ");
+                    wiseSaying_wantModify.quote = sc.nextLine().trim();
+                    System.out.printf("작가(기존) : %s\n", wiseSaying_wantModify.author);
+                    System.out.printf("작가 : ");
+                    wiseSaying_wantModify.author = sc.nextLine().trim();
+
+                    System.out.printf("%d번 명언이 수정되었습니다.\n", modify_id);
+
+                    break ;
+
+
                 case "삭제":
                     int delete_id = rq.getIntParam("id", 0);    // 사용자가 삭제하고자 하는 명언의 아이디를 담을 변수
 
