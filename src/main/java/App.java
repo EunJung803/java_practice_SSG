@@ -10,10 +10,6 @@ public class App {
         // 명령을 입력받을 스캐너 선언
         Scanner sc = new Scanner(System.in);
 
-        // ArrayList 선언
-        ArrayList<String> quoteList = new ArrayList<String>();  // 명언 리스트
-        ArrayList<String> authorList = new ArrayList<String>(); // 작가 리스트
-
         // id 저장할 변수 선언
         int id = 0;
 
@@ -25,13 +21,17 @@ public class App {
             switch (command) {
                 case "등록":
                     System.out.printf("명언 : ");
-                    quoteList.add(sc.nextLine().trim());    // 명언 리스트에 명언 추가
+                    String quote = sc.nextLine().trim();    // 명언을 담는 String 변수 quote
                     System.out.printf("작가 : ");
-                    authorList.add(sc.nextLine().trim());   // 작가 리스트에 작가 추가
+                    String author = sc.nextLine().trim();   // 작가명을 담는 String 변수 author
 
-                    id++;
+                    id++; // 등록 시 id 증가
+
+                    WiseSaying wiseSaying = new WiseSaying(id, quote, author);  // WiseSaying 객체에 담기
 
                     System.out.printf("%d번 명언이 등록되었습니다.\n", id);
+
+                    System.out.println(wiseSaying);     // 확인용
 
                     break ;
 
