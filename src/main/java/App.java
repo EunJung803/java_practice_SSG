@@ -5,8 +5,9 @@ import java.util.Scanner;
 public class App {
     // 명령을 입력받을 스캐너 선언
     private Scanner sc;
-    public App() {
-        sc = new Scanner(System.in);
+
+    public App(Scanner sc) {
+        this.sc = sc;
     }
 
     public void run() {
