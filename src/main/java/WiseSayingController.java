@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class WiseSayingController {
@@ -29,7 +30,7 @@ public class WiseSayingController {
         }
 
         // 찾았으면 그 WiseSaying은 삭제 !
-        wiseSaying_Repo.wiseSayingList.remove(wiseSaying_wantDelete);
+        wiseSaying_Repo.remove(delete_id);      // 삭제를 위해 데이터를 Repository에 있는 remove에 전달
 
         System.out.printf("%d번 명언이 삭제되었습니다.\n", delete_id);
     }
@@ -37,8 +38,10 @@ public class WiseSayingController {
     public static void viewList(Rq rq) {
         System.out.println("번호 / 작가 / 명언\n" +
                 "----------------------");
-        for (int i = wiseSaying_Repo.wiseSayingList.size()-1; i>=0; i--) {
-            WiseSaying wiseSayingList_element = wiseSaying_Repo.wiseSayingList.get(i);  // i번째에 있는 WiseSaying element
+        List<WiseSaying> wiseSayingList = wiseSaying_Repo.findAll();    // Repo에 저장된 리스트를 불러온다
+
+        for (int i = wiseSayingList.size()-1; i>=0; i--) {
+            WiseSaying wiseSayingList_element = wiseSayingList.get(i);  // i번째에 있는 WiseSaying element
 
             // 그 element에서 id, quote, author을 출력하여 보여준다.
             System.out.printf("%d / %s / %s \n",
@@ -64,11 +67,12 @@ public class WiseSayingController {
         // 찾았으면 수정 진행
         System.out.printf("명언(기존) : %s\n", wiseSaying_wantModify.quote);
         System.out.printf("명언 : ");
-        wiseSaying_wantModify.quote = sc.nextLine().trim();
+        String quote = sc.nextLine().trim();
         System.out.printf("작가(기존) : %s\n", wiseSaying_wantModify.author);
         System.out.printf("작가 : ");
-        wiseSaying_wantModify.author = sc.nextLine().trim();
+        String author = sc.nextLine().trim();
 
+        wiseSaying_Repo.modify(modify_id, quote, author);   // 수정을 위해 데이터를 Repository에 있는 modify에 전달
         System.out.printf("%d번 명언이 수정되었습니다.\n", modify_id);
     }
 
@@ -78,12 +82,9 @@ public class WiseSayingController {
         System.out.printf("작가 : ");
         String author = sc.nextLine().trim();   // 작가명을 담는 String 변수 author
 
-        wiseSaying_Repo.id++; // 등록 시 id 증가
+        WiseSaying wiseSaying = wiseSaying_Repo.add(quote, author);     // 등록을 위해 데이터를 Repository에 있는 add에 전달
 
-        WiseSaying wiseSaying = new WiseSaying(wiseSaying_Repo.id, quote, author);  // WiseSaying 객체에 담기
-        wiseSaying_Repo.wiseSayingList.add(wiseSaying);     // 담은걸 list에 추가
-
-        System.out.printf("%d번 명언이 등록되었습니다.\n", wiseSaying_Repo.id);
+        System.out.printf("%d번 명언이 등록되었습니다.\n", wiseSaying.id);
     }
 
 }
