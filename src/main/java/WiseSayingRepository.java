@@ -25,9 +25,16 @@ public class WiseSayingRepository {
     }
 
     // 삭제
-    public void remove(int delete_id) {
+    public boolean remove(int delete_id) {
         WiseSaying wiseSaying_found = findById(delete_id);
+
+        if (wiseSaying_found == null) {
+            return false;
+        }
+
         wiseSayingList.remove(wiseSaying_found);
+
+        return true;
     }
 
     public List<WiseSaying> findAll() {
@@ -35,10 +42,17 @@ public class WiseSayingRepository {
     }
 
     // 수정
-    public void modify(int modify_id, String quote, String author) {
+    public boolean modify(int modify_id, String quote, String author) {
         WiseSaying wiseSaying_found = findById(modify_id);
+
+        if (wiseSaying_found == null) {
+            return false;
+        }
+
         wiseSaying_found.quote = quote;
         wiseSaying_found.author = author;
+
+        return true;
     }
 
     // 등록
