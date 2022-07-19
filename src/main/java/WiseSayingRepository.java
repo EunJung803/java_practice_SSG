@@ -1,6 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
 
+// 리포지터리는 데이터 보관의 역할
+// 데이터를 저장 / 수정 / 보관하는 단순한 일은 리포지터리의 일이다.
+
+// 서비스에게 받은 주문대로 재료를 다듬는다.
+// 재료담당직원 == 리포지터리
+
 public class WiseSayingRepository {
 
     // id 저장할 변수 선언

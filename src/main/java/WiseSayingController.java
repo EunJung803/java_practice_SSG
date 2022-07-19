@@ -1,6 +1,9 @@
 import java.util.List;
 import java.util.Scanner;
 
+// 컨트롤러는 사용자만 신경쓴다.
+// 고객 응대 점원 == 컨트롤러
+
 public class WiseSayingController {
 
     // 명령을 입력받을 스캐너 선언
